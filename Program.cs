@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Threading;
 
-namespace ConsoleAppGameSD
+namespace ObjectOrientad_Programming
 {
     internal class Program
     {
@@ -16,82 +16,152 @@ namespace ConsoleAppGameSD
         static public bool hasSword = false;
         static public int timesTrained = 0;
         static public bool screetched = false;
+        static public bool hasPotion = false;
         static void Main(string[] args)
         {
             EarthMonster earthling = new EarthMonster("Brown", "Smigle", 6, 6, 7, 6, 10, 25);
             WaterHydra waterHydra1 = new WaterHydra("light blue", "Georaph", 3, 6, 6, 7, 5, 9, 10);
-            VoidWorm voidWorm = new VoidWorm("Kanox", 12, 4, 12, 10, 10, 30);
+            VoidWorm voidWorm = new VoidWorm("Kanox", 12, 4, 12, 3, 3, 50);
             hp = maxHp;
             stamina = maxStamina;
+            PlayerDead("voidworm");
             Intro();
 
-
+            void PlayerDead(string attacker)
+            {
+                Console.Clear();
+                if (hasPotion)
+                {
+                    hp = 1;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("You died but...");
+                    Thread.Sleep(500);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("You had a Potion of Health so you are now back at 1 hp!");
+                    hasPotion = false;
+                    Console.WriteLine("");
+                    Thread.Sleep(500);
+                    PressEnter();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    switch (attacker)
+                    {
+                        case "hydra":
+                            Console.WriteLine("You died to a Water Hydra. Sucks to be you. Good bye!");
+                            break;
+                        case "earthling":
+                            Console.WriteLine("You died to an Earthling. How did you even do that? You shhould be stacked right now. Either way good bye!");
+                            break;
+                        case "voidworm":
+                            Console.WriteLine("You died to a Void Worm. Your journey ends here you have to start all over! Good bye!");
+                            break;
+                    }
+                    Thread.Sleep(2000);
+                    System.Environment.Exit(0);
+                }
+            }
             void Loading()
             {
                 Console.Clear();
-                Console.WriteLine("Loading the game. Please wait." +
-                    "Loading.");
-                Thread.Sleep(400);
+                Console.WriteLine("Loading the game. Please wait.");
+                Console.WriteLine("Loading");
+                Thread.Sleep(500);
                 Console.Clear();
-                Console.WriteLine("Loading the game. Please wait." +
-                    "Loading..");
-                Thread.Sleep(400);
+                Console.WriteLine("Loading the game. Please wait.");
+                Console.WriteLine("Loading.");
+                Thread.Sleep(500);
                 Console.Clear();
-                Console.WriteLine("Loading the game. Please wait." +
-                    "Loading..."); ;
-                Thread.Sleep(400);
+                Console.WriteLine("Loading the game. Please wait.");
+                Console.WriteLine("Loading.."); ;
+                Thread.Sleep(500);
                 Console.Clear();
-                Console.WriteLine("Loading the game completed."
+                Console.WriteLine("Loading the game. Please wait.");
+                Console.WriteLine("Loading..."); ;
+                Thread.Sleep(500);
+                Console.Clear();
+                Console.WriteLine("Loading the game completed.");
                 Thread.Sleep(2000);
                 Console.Clear();
             }
-
             void Intro()
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("SCREETSH");
-                Thread.Sleep(1000);
+                Thread.Sleep(800);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Mom, dad, what is that sound?");
-                Thread.Sleep(3000);
+                Thread.Sleep(1600);
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Mom: Everything will be alright!");
-                Thread.Sleep(1500);
+                Thread.Sleep(1600);
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Dad: Hey come here, I will put you in a Cryopod. " +
-    "You might feel a bit wierd at first. But everying will be alright!");
-                Thread.Sleep(7000);
+    "You might feel a bit weird at first. But everying will be alright!");
+                Thread.Sleep(2400);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("But I don't want to leave you.");
-                Thread.Sleep(2000);
+                Thread.Sleep(1600);
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Mom: Give us a hug, we will contact u soon.");
-                Thread.Sleep(4000);
+                Thread.Sleep(1600);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Okayy...");
-                Thread.Sleep(3000);
+                Thread.Sleep(1600);
+                Console.WriteLine("");
+                PressEnter();
                 Loading();
                 Landing();
             }
-
+            void PressEnter()
+            {
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("Press ENTER to continue...");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.ReadLine();
+            }
             void Landing()
             {
                 bool didChoose = true;
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Cryopod: You have just landed on an planet 58232.");
+                Thread.Sleep(1000);
                 Console.WriteLine("Cryopod: Your change to survive is 0.0032%.");
+                Thread.Sleep(2000);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Well, thats nice to know.");
+                Thread.Sleep(1000);
                 Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("Cryopod: The best way to survive is to find drink able water.");
+                Console.WriteLine("Cryopod: The best way to survive is to find drinkable water.");
+                Thread.Sleep(2000);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Yeah, tell me where I can find some.");
+                Thread.Sleep(1000);
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Cryopod: I'm not able to Source any water, since the powerline to the gps is broken.");
+                Thread.Sleep(2000);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Of course, my luck. I better search for some nearby water then myself soon.");
+                Thread.Sleep(1000);
+                Console.WriteLine("");
                 while (didChoose)
                 {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Cryopod: You have just landed on an planet 58232.");
+                    Console.WriteLine("Cryopod: Your change to survive is 0.0032%.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Well, thats nice to know.");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Cryopod: The best way to survive is to find drinkable water.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Yeah, tell me where I can find some.");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Cryopod: I'm not able to Source any water, since the powerline to the gps is broken.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Of course, my luck. I better search for some nearby water then myself soon.");
+                    Console.WriteLine("");
                     string a = Choices(3, "Scout", "Sleep", "Eat", "", "");
                     switch (a)
                     {
@@ -107,12 +177,11 @@ namespace ConsoleAppGameSD
                             break;
                         default:
                             Console.WriteLine("Not a valid input...");
+                            PressEnter();
                             break;
                     }
-                    Console.ReadLine();
                 }
             }
-
             void Scout(int stage)
             {
                 switch (stage)
@@ -123,7 +192,8 @@ namespace ConsoleAppGameSD
                         Console.WriteLine("You are now walking and you see a forest in the distance.");
                         Thread.Sleep(3000);
                         Console.WriteLine("You see a lake and walk to it.");
-                        Thread.Sleep(3000);
+                        Console.WriteLine("");
+                        PressEnter();
                         Loading();
                         Lake();
                         break;
@@ -134,42 +204,42 @@ namespace ConsoleAppGameSD
                         Thread.Sleep(2000);
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("You are now entering combat...");
-                        Thread.Sleep(2000);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("");
+                        PressEnter();
                         Loading();
                         FightWaterHydra();
                         break;
                     case 3:
                         Console.Clear();
-                        Console.WriteLine("An Earthling apeared out of nowhere. he looks really mad. You have to fight him to continue on this journey.");
+                        Console.WriteLine("An Earthling apeared out of nowhere. He looks really mad. You have to fight him to continue on this journey.");
                         Thread.Sleep(2000);
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("You are now entering combat...");
-                        Thread.Sleep(2000);
+                        Console.WriteLine("");
+                        PressEnter();
                         Loading();
                         FightEarthling();
                         break;
                 }
             }
-
             void Sleep()
             {
                 Console.Clear();
                 Console.WriteLine("You are back at Max stamina because you had a pleasant night rest");
                 stamina = maxStamina;
                 Console.WriteLine("You are now at " + stamina + " stamina.");
-                Console.WriteLine("press enter to return...");
+                Console.WriteLine("");
+                PressEnter();
             }
-
             void Eat()
             {
                 Console.Clear();
                 Console.WriteLine("You are back at Max health because you ate a delicious meal.");
                 hp = maxHp;
                 Console.WriteLine("You are now at " + hp + " hp.");
-                Console.WriteLine("press enter to return...");
+                Console.WriteLine("");
+                PressEnter();
             }
-
             void Train()
             {
                 Console.Clear();
@@ -180,8 +250,9 @@ namespace ConsoleAppGameSD
                 Console.WriteLine("You gained " + newDamage + " damage. Your total is now " + damage + ".");
                 timesTrained++;
                 stamina -= 10;
+                Console.WriteLine("");
+                PressEnter();
             }
-
             void AttackHydra()
             {
                 Console.Clear();
@@ -189,8 +260,8 @@ namespace ConsoleAppGameSD
                 int dmg = rnd.Next(1, damage);
                 waterHydra1.hp -= dmg;
                 Console.WriteLine("You made swung your fist and did " + dmg + " damage to the Hydra. The Hydra has " + waterHydra1.hp + " hp left.");
+                PressEnter();
             }
-
             void Block()
             {
                 Console.Clear();
@@ -198,6 +269,8 @@ namespace ConsoleAppGameSD
                 isBlocking = true;
                 hp += 2;
                 Console.WriteLine("You now have " + hp + " hp left.");
+                Console.WriteLine("");
+                PressEnter();
             }
             void Run()
             {
@@ -207,7 +280,6 @@ namespace ConsoleAppGameSD
                 "You have to start all over but at least you are still alive. Either way we dont want you quiters so bye!");
                 System.Environment.Exit(0);
             }
-
             string Choices(int numberOfChoices, string choice1, string choice2, string choice3, string choice4, string choice5)
             {
                 switch (numberOfChoices)
@@ -231,14 +303,15 @@ namespace ConsoleAppGameSD
                         return "Not defined";
                 }
             }
-
             void Lake()
             {
-                Console.Clear();
-                Console.WriteLine("You have now arived at the lake.");
                 bool didChoose = true;
                 while (didChoose)
                 {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("You have now arived at the lake.");
+                    Console.WriteLine("");
                     string a = Choices(3, "Scout", "Sleep", "Eat", "", "");
                     switch (a)
                     {
@@ -254,9 +327,9 @@ namespace ConsoleAppGameSD
                             break;
                         default:
                             Console.WriteLine("Not a valid input...");
+                            PressEnter();
                             break;
                     }
-                    Console.ReadLine();
                 }
             }
             void FightWaterHydra()
@@ -265,11 +338,13 @@ namespace ConsoleAppGameSD
                 while (isAlive)
                 {
                     Console.ForegroundColor = ConsoleColor.White;
-                    PlayersTurn();
                     if (hp <= 0)
                     {
-                        Console.WriteLine("The hydra has defeated you. You died!");
-                        System.Environment.Exit(0);
+                        PlayerDead("hydra");
+                    }
+                    else
+                    {
+                        PlayersTurn();
                     }
                     if (waterHydra1.hp <= 0)
                     {
@@ -280,18 +355,19 @@ namespace ConsoleAppGameSD
                         Thread.Sleep(500);
                         Console.ForegroundColor = ConsoleColor.DarkMagenta;
                         Console.WriteLine("1x Golden Sword");
-                        Thread.Sleep(500);
+                        hasSword = true;
+                        Thread.Sleep(700);
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("3x Hydra Meat");
-                        Thread.Sleep(500);
+                        Thread.Sleep(700); ;
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("2x Golden Coin");
+                        Thread.Sleep(700);
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine("===================================================");
 
                         Thread.Sleep(2000);
-                        Console.WriteLine("You pick it up and this will boost you damge by x2!");
-                        hasSword = true;
+                        Console.WriteLine("You pick up the golden sword and this will boost you damage by x2!");
                         isAlive = false;
                     }
                     else
@@ -300,16 +376,14 @@ namespace ConsoleAppGameSD
                         HydrasTurn();
                     }
                 }
-                Console.WriteLine("Press ENTER to continue...");
-                Console.ReadLine();
+                PressEnter();
                 HydraDefeated();
-
             }
-
             void PlayersTurn()
             {
                 Console.Clear();
                 Console.WriteLine("It is your turn to attack the Hydra. It has " + waterHydra1.hp + " hp left.");
+                Console.WriteLine("");
                 bool didNotChoose = true;
                 while (didNotChoose)
                 {
@@ -330,19 +404,16 @@ namespace ConsoleAppGameSD
                             break;
                         default:
                             Console.WriteLine("You missed your turn better luck next time!");
-                            Thread.Sleep(2000);
+                            PressEnter();
                             break;
                     }
                 }
-                Console.WriteLine("Press ENTER to continue...");
-                Console.ReadLine();
             }
-
             void HydrasTurn()
             {
                 Console.Clear();
                 Console.WriteLine("It is the Hydra's turn to attack.");
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
                 Random rnd = new Random();
                 int dmg = rnd.Next(1, waterHydra1.attack);
                 int missed = rnd.Next(0, 2);
@@ -360,10 +431,8 @@ namespace ConsoleAppGameSD
                     hp -= dmg;
                     Console.WriteLine("The Hydra swung his head at you and did a total of " + dmg + " damage to you. You now have " + hp + " hp left.");
                 }
-                Console.WriteLine("Press ENTER to continue...");
-                Console.ReadLine();
+                PressEnter();
             }
-
             void HydraDefeated()
             {
                 Console.Clear();
@@ -404,12 +473,11 @@ namespace ConsoleAppGameSD
                             break;
                         default:
                             Console.WriteLine("Not a valid input.");
-                            Thread.Sleep(2000);
+                            PressEnter();
                             break;
                     }
                 }
             }
-
             void FightEarthling()
             {
                 Console.WriteLine("There is a ugly looking earthling running at you.");
@@ -420,23 +488,24 @@ namespace ConsoleAppGameSD
                     PlayersTurnEarthling();
                     if (hp <= 0)
                     {
-                        Console.WriteLine("The earthling has defeated you. You died!");
-                        System.Environment.Exit(0);
+                        PlayerDead("earthling");
                     }
                     if (earthling.hp <= 0)
                     {
                         Console.WriteLine("You defeated the Earthling! You won!");
                         Thread.Sleep(2000);
                         Console.WriteLine("=================      Drops      =================");
-                        Thread.Sleep(500);
+                        Thread.Sleep(700);
                         Console.ForegroundColor = ConsoleColor.DarkMagenta;
                         Console.WriteLine("1x Heal Postion");
-                        Thread.Sleep(500);
+                        Thread.Sleep(700);
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("1x Golden Coin");
+                        Thread.Sleep(700);
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine("===================================================");
                         isAlive = false;
+
                     }
                     else
                     {
@@ -444,14 +513,14 @@ namespace ConsoleAppGameSD
                         EarthlingTurn();
                     }
                 }
-                Console.WriteLine("Press ENTER to continue...");
-                Console.ReadLine();
+                PressEnter();
+                FightVoidWorm();
             }
-
             void PlayersTurnEarthling()
             {
                 Console.Clear();
                 Console.WriteLine("It is your turn to attack the Earthling. It has " + earthling.hp + " hp left.");
+                Console.WriteLine("");
                 bool didNotChoose = true;
                 while (didNotChoose)
                 {
@@ -472,19 +541,16 @@ namespace ConsoleAppGameSD
                             break;
                         default:
                             Console.WriteLine("You missed your turn better luck next time!");
-                            Thread.Sleep(2000);
                             didNotChoose = false;
                             break;
                     }
                 }
-                Console.WriteLine("Press ENTER to continue");
-                Console.ReadLine();
             }
-
             void EarthlingTurn()
             {
                 Console.Clear();
                 Console.WriteLine("It is the Earthling's turn to attack.");
+                Console.WriteLine("");
                 Thread.Sleep(3000);
                 Random rnd = new Random();
                 int dmg = rnd.Next(1, earthling.attack);
@@ -503,10 +569,9 @@ namespace ConsoleAppGameSD
                     hp -= dmg;
                     Console.WriteLine("The earthling threw a rock at you and did a total of " + dmg + " damage to you. You now have " + hp + " hp left.");
                 }
-                Console.WriteLine("Press ENTER to continue...");
-                Console.ReadLine();
+                Console.WriteLine("");
+                PressEnter();
             }
-
             void AttackEartling()
             {
                 Console.Clear();
@@ -519,23 +584,33 @@ namespace ConsoleAppGameSD
                 }
                 earthling.hp -= dmg;
                 Console.WriteLine("You made swung your sword and did " + dmg + " damage to the Earthling. The Earthling has " + earthling.hp + " hp left.");
+                Console.WriteLine("");
+                PressEnter();
             }
-
             void FightVoidWorm()
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("While you are walking through the forest you hear an unknown sound.");
+                Thread.Sleep(1000);
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("SCREETSH!");
                 Console.ForegroundColor = ConsoleColor.White;
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
                 Console.WriteLine("No, not that sound again!");
+                Thread.Sleep(1000);
+                Console.WriteLine("Out of nowhere a Void Worm appears.");
+                Thread.Sleep(1000);
+                Console.WriteLine("You have to fight him to continue this journey.");
+                Console.WriteLine("");
+                Console.WriteLine("Press ENTER to continue...");
+                Console.ReadLine();
                 bool isAlive = true;
                 while (isAlive)
                 {
                     if (hp <= 0)
                     {
-                        //player dead
+                        PlayerDead("voidworm");
                     }
                     else
                     {
@@ -543,57 +618,84 @@ namespace ConsoleAppGameSD
                     }
                     if (voidWorm.hp <= 0)
                     {
-                        //Void worm dead
+                        Console.WriteLine("You defeated the Void Worm! Congratulations on your win!");
+                        Thread.Sleep(1000);
+                        //loot
+                        isAlive = false;
+                        PressEnter();
                     }
                     else
                     {
                         VoidWormsTurn();
                     }
                 }
-                Console.WriteLine("Press ENTER to continue...");
-                Console.ReadLine();
             }
-
             void PlayersTurnVoidWorm()
             {
-                Console.WriteLine("Its your turn.");
-                string a = Choices(3, "Attack", "Block", "Run", "", "");
-                switch (a)
+                Console.Clear();
+                Console.WriteLine("Its your turn to attack the Void Worm.");
+                Console.WriteLine("");
+                if (screetched)
                 {
-                    case "1":
-                        AttackvoidWorm();
-                        break;
-                    case "2":
-                        Block();
-                        break;
-                    case "3":
-                        Run();
-                        break;
+                    screetched = false;
+                    string a = Choices(2, "Block", "Run", "", "", "");
+                    switch (a)
+                    {
+                        case "1":
+                            Block();
+                            break;
+                        case "2":
+                            Run();
+                            break;
+                        default:
+                            Console.WriteLine("You missed your turn. Better luck next time.");
+                            PressEnter();
+                            break;
+                    }
+                }
+                else
+                {
+                    string b = Choices(3, "Attack", "Block", "Run", "", "");
+                    switch (b)
+                    {
+                        case "1":
+                            AttackvoidWorm();
+                            break;
+                        case "2":
+                            Block();
+                            break;
+                        case "3":
+                            Run();
+                            break;
+                        default:
+                            PressEnter();
+                            break;
+                    }
                 }
             }
-
             void VoidWormsTurn()
             {
-                Console.WriteLine("Its thee tvoid worms turn to attack.");
-                Thread.Sleep(2000);
+                Console.Clear();
+                Console.WriteLine("Its the Void Worms turn to attack.");
+                Console.WriteLine("");
+                Thread.Sleep(1000);
                 Random rnd = new Random();
                 bool swordtrow = rnd.Next(2) == 0;
-                int ScreetshPosability = rnd.Next(1, 3);
+                int ScreetshPosability = rnd.Next(1, 5);
                 if (swordtrow)
                 {
                     voidWorm.TrowSword(ref hasSword);
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1000);
                 }
                 if (ScreetshPosability == 1)
                 {
                     voidWorm.Screetsh(ref hp, ref screetched);
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1000);
                 }
                 voidWorm.Attack(ref hp, ref isBlocking);
-                Console.WriteLine("Press ENTER to continue...");
-                Console.ReadLine();
+                Console.WriteLine("");
+                PressEnter();
             }
-
             void AttackvoidWorm()
             {
                 Random rnd = new Random();
@@ -608,9 +710,9 @@ namespace ConsoleAppGameSD
                     Console.WriteLine("You dont have your sword. You can get it back by rolling a 4 or higher on a dice of 6.");
                     Console.WriteLine("Press ENTER to roll the dice...");
                     Console.ReadLine();
-                    int diceRoll = rnd.Next(1, 6);
+                    int diceRoll = rnd.Next(1, 7);
                     Console.WriteLine("You rolled a " + diceRoll + "!");
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1000);
                     if (diceRoll >= 4)
                     {
                         Console.WriteLine("You have gotten your sword back. You now deal twice as much damage!");
@@ -620,14 +722,15 @@ namespace ConsoleAppGameSD
                     else
                     {
                         Console.WriteLine("Unfortuneatly you didnt get your sword back. Try again next turn.");
+                        Console.WriteLine("");
                     }
                 }
+                voidWorm.hp -= dmg;
                 Console.WriteLine("You did a grant total of " + dmg + " damage to the Void worm. It now has " + voidWorm.hp + " hp left");
-                Console.WriteLine("Press ENTER to continue...");
-                Console.ReadLine();
+                Console.WriteLine("");
+                PressEnter();
             }
         }
-
     }
 
     //WaterHydra (First Monster)
@@ -707,12 +810,13 @@ namespace ConsoleAppGameSD
             this.attack = attack;
             this.defence = defence;
             this.screetchdamage = screetchdamage;
+            this.hp = hp;
         }
 
         public void Screetsh(ref int hp, ref bool screetshed)
         {
             Console.WriteLine("The Void Worm has used its Screetch ability. You took " + screetchdamage + " damage and you are not able to attack next move.");
-            hp -= 10;
+            hp -= screetchdamage;
             screetshed = true;
         }
 
@@ -733,7 +837,7 @@ namespace ConsoleAppGameSD
             }
             else
             {
-                Console.WriteLine("");
+                Console.WriteLine("The Void Worm missed you entirely. you took no damage at all.");
             }
 
         }
